@@ -1,6 +1,6 @@
 from django.db import models
 
-class User(models.Model):
+class Employee(models.Model):
     fname = models.CharField(max_length=10)
     lname = models.CharField(max_length=50)
     email = models.EmailField(max_length=50, unique=True)
