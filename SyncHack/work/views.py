@@ -4,6 +4,11 @@ from django.contrib import messages
 from .models import Employee
 
 
+def WelcomeView(request):
+
+    return render(request, 'home.html')
+
+
 
 def Signupview(request):
     all_employees = Employee.objects.all
@@ -12,8 +17,7 @@ def Signupview(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Registration Successful')
-            return render(request, 'work\dashboard.html', {'all': all_employees})
+            return render(request, 'home.html', {'all': all_employees})
     else:
         form = SignUpForm()
-        return render(request, 'work\Signup.html')
-
+        return render(request, 'Signup.html')
