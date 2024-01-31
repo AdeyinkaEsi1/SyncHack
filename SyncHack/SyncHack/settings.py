@@ -84,7 +84,7 @@ DATABASES = {
 }
 
 
-# AUTH_USER_MODEL = 'work.CustomUser'
+AUTH_USER_MODEL = 'work.UserProfile'
 
 
 # Password validation
