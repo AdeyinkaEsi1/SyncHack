@@ -61,22 +61,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-# UserProfile._meta.get_field('groups').related_name = 'user_profiles_groups'
-# UserProfile._meta.get_field('user_permissions').related_name = 'user_profiles_permissions'
 
-
-# class Employee(models.Model):
-#     fname = models.CharField(max_length=10)
-#     lname = models.CharField(max_length=50)
-#     email = models.EmailField(max_length=50, unique=True)
-#     pword = models.CharField(max_length=50)
-
-#     class Meta:
-#         unique_together = ('fname', 'lname')
-
-
-#     def __str__(self):
-#         return self.fname + ' ' + self.lname + ' ' + self.email
 
 class Task(models.Model):
     STATUS_CHOICES = [

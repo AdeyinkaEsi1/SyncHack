@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LMS</title>
+    <title>Galaxy Coders</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
         <div class="row">
             <!-- Sidebar -->
 
-            <div class="col-md-2 bg-dark text-light vh-100">
+            <div class="col-md-2 bg-dark text-light vh-100 position-fixed ">
                 <h5>Options</h5>
                 <ul class="nav flex-column">
                     <li>
@@ -46,8 +46,8 @@
                                 
                                 
                                 {% if user.role == 'admin' %}
-                                <li><a href="#" class="nav-link "><i class="bi bi-credit-card"></i></span>Staff</a></li>
-                                <li><a href="#" class="nav-link "><i class="bi bi-credit-card"></i></span>Staff</a></li>
+                                <li><a href="{% url 'add_user' %}" class="nav-link "><i class="bi bi-credit-card"></i></span>Add Employee</a></li>
+                                <li><a href="{% url 'staff_list' %}" class="nav-link "><i class="bi bi-credit-card"></i></span>View Staff</a></li>
                                
                                 {% endif %}
                                 <li><a href="#" class="nav-link "><i class="bi bi-calendar"></i></span>Staff</a></li>
@@ -58,16 +58,18 @@
                         <details>
                             <summary class="nav-link h8">
                                 <span class="badge h8 me-2"></span>
-                                Staff
+                                Tasks
                                 <i class="bi bi-caret-right"></i>
                             </summary>
                             <ul class="list-unstyled ml-3 mt-2 h8">
                                 {% if user.role == 'admin' %}
-                                <li><a href="#" class="nav-link "><i class="bi bi-credit-card"></i></span>Staff</a></li>
-                                <li><a href="#" class="nav-link "><i class="bi bi-cash"></i></span>Staff</a></li>
+                                <li><a href="{% url 'departments' %}" class="nav-link "><i class="bi bi-credit-card"></i></span>Add Department</a></li>
+                                {% comment %} <li><a href="{% url 'add_tasks' %}" class="nav-link "><i class="bi bi-cash"></i></span>Add & Assign Tasks</a></li> {% endcomment %}
+                                <li><a href="{% url 'view_tasks' %}" class="nav-link "><i class="bi bi-credit-card"></i></span>View Tasks</a></li>
                                 {% endif %}
-                                <li><a href="#}" class="nav-link "><i class="bi bi-credit-card"></i></span>Staff</a></li>
-                                <li><a href="#" class="nav-link "><i class="bi bi-calendar"></i></span>Staff</a></li>
+                                {% if user.role == 'employee' %}
+                                <li><a href="{% url 'my_tasks' %}" class="nav-link "><i class="bi bi-credit-card"></i></span>View Tasks</a></li>
+                                {% endif %}
                             </ul>
                         </details>
                     </li>
@@ -84,7 +86,7 @@
         
                     <div>
                         <!-- Profile Button -->
-                        {% comment %} <a href="{% url 'update_profile' %}" class="btn btn-secondary mx-2">Profile</a> {% endcomment %}
+                        <a href="{% url 'update_profile' %}" class="btn btn-secondary mx-2">Profile</a>
                         
                         <!-- Logout Button -->
                         <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
@@ -103,3 +105,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
