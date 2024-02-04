@@ -2,12 +2,10 @@
 {% block maincontent %}
 
 
-<div class="col-md-9">
+<div class="col-md-12">
     <div class="container mt-4">
         
-        <h2>Departments List</h2>
-        
-        {% comment %} <a href="{% url 'add_department' %}" class="btn btn-primary">Add Department</a> {% endcomment %}
+        <h2>Departments List</h2> 
         <div class="card">
             <div class="column">
                 <div class="card">
@@ -61,7 +59,7 @@
         
                                     <form method="post" class="mt-4">
                                         {% csrf_token %}
-                                        {{form.as_p}}
+                                        {{ form.as_p }}
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
