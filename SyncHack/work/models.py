@@ -7,9 +7,9 @@ from django.utils import timezone
 class Department(models.Model):
     name = models.CharField(max_length=100)
     
-
     def __str__(self):
         return self.name
+
 
 class UserProfileManager(BaseUserManager):
     def create_user(self, email, password=None, role='employee', department=None, **extra_fields):
