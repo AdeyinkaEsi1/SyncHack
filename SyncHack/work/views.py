@@ -17,12 +17,12 @@ def WelcomeView(request):
 
     return render(request, 'home.html')
 
+
 def RegisterView(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-
             user = UserProfile.objects.create_user(
                 email=form.cleaned_data['email'],
                 password=password,  
@@ -30,38 +30,12 @@ def RegisterView(request):
                 last_name=form.cleaned_data['last_name'],
                 role=form.cleaned_data['role'],
             )
-
             if user:
                 send_signup_email(user, password)
                 return redirect('login')
-
     else:
         form = UserRegistrationForm()
-
     return render(request, 'register.html', {'form': form})
-
-
-# def RegisterView(request):
-#     user = None
-
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(request.POST)
-#         if form.is_valid():
-#              user_manager = UserProfile.objects
-#              user = user_manager.create_user(
-#                 email=form.cleaned_data['email'],
-#                 password=form.cleaned_data['password'],
-#                 first_name=form.cleaned_data['first_name'],
-#                 last_name=form.cleaned_data['last_name'],
-#                 role=form.cleaned_data['role'],
-#             )
-#              if user:
-#                 send_signup_email(user, password)
-#                 return redirect('login')
-
-#     else:
-#         form = UserRegistrationForm()
-#     return render(request, 'register.html', {'form': form})
 
 
 # Adding users/staff - done by admin
@@ -72,23 +46,19 @@ def AddUserView(request):
         form = AddUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-
             password = User.objects.make_random_password()
             user.set_password(password)
             user.save()
-
             send_signup_email(user, password)
-
             return redirect('add_user')  
     else:
         form = AddUserForm()
-
     return render(request, 'add_user.html', {'form': form})
 
 
 def send_signup_email(user, password):
     try:
-        subject = 'Welcome to GalaxyC'
+        subject = 'Welcome to Galaxy Coders'
         message = f"Below are your login credentials.\nUsername: {user.email}\nPassword: {password}\n"
         from_email = settings.EMAIL_HOST_USER
         recipient_list = [user.email]
@@ -117,6 +87,7 @@ def LoginView(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+
 def UpdateProfileView(request):
     user = request.user  
     if request.method == 'POST':
@@ -128,17 +99,22 @@ def UpdateProfileView(request):
         form = UpdateProfileForm(instance=user)
     return render(request, 'update_profile.html', {'form': form})
 
+
 def LogoutView(request):
+    
     logout(request)
     return redirect('home')
+
 
 def DashboardView(request):
     
     return render(request, 'dashboard.html')
 
+
 def AdminDashboardView(request):
     
     return render(request, 'admin_dashboard.html')
+
 
 def StaffView(request):
     if request.method == 'GET':
@@ -148,16 +124,17 @@ def StaffView(request):
     
     return render(request, 'staff.html', {'users': users})
 
+
 @login_required
 def DepartmentsView(request):
     if request.method == 'POST':
         form = AddDepartmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('departments')  
+            return redirect('departments')
     else:
         form = AddDepartmentForm()
-        departments = Department.objects.all()
+        departments = Department.objects.all
     
     return render(request, 'departments.html', {'form': form, 'departments': departments})
 
