@@ -24,18 +24,13 @@ class AddUserForm(forms.ModelForm):
         model = UserProfile
         fields = ['email', 'first_name', 'last_name', 'role', 'department']
 
-    # class Meta:
-    #     model = UserProfile
-    #     fields = ['email', 'first_name', 'last_name', 'role', 'department', 'password']
-    #     widgets = {
-    #         'password': forms.PasswordInput(),
-    #     }
 
 class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
         fields = ['email', 'first_name', 'last_name']
+
 
 class AddDepartmentForm(forms.ModelForm):
     class Meta:
